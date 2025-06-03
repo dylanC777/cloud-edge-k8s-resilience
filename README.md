@@ -70,12 +70,7 @@ config.yaml
 python main.py --config config.yaml
 ```
 
-Test artifacts will be saved under the `results/` directory, including:
-
-- ✅ Locust log CSV  
-- ✅ Console output  
-- ✅ Copy of the fault YAML used  
-- ✅ Per-test summary report
+Test artifacts will be saved under the `results/` directory.
 
 ---
 
