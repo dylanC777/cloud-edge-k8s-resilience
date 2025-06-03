@@ -26,9 +26,9 @@ Cloud-edge architectures face heightened fault sensitivity due to distributed to
 | `ssh_manager.py`    | Handles remote control of Kubernetes/client nodes     |
 | `k8s_controller.py` | Applies Chaos Mesh YAML files to inject faults        |
 | `locust_runner.py`  | Triggers remote Locust load tests                     |
-| `result_manager.py` | Saves logs, CSVs, and per-test summaries              |
+| `result_manager.py` | Saves CSVs, visualizations, and per-test summaries    |
 | `check_cluster.py`  | Validates cluster readiness before experiments        |
-| `config.yaml`       | Stores system paths, credentials, and test parameters |
+| `config.yaml`       | Stores experimental parameters and tasks              |
 
 ---
 
@@ -120,7 +120,7 @@ To be confirmed. The code will be released under an open-source license (e.g., M
 
 ## 📬 Citation
 
-If this framework supports your research, please cite the associated thesis or [contact the author](mailto:zihao.chen@monash.edu) for preliminary citation format.
+If this framework supports your research, please cite the associated thesis or [contact the author](mailto:zche0292@student.monash.edu) for preliminary citation format.
 
 ---
 
@@ -128,5 +128,5 @@ If this framework supports your research, please cite the associated thesis or [
 
 **Zihao Chen**  
 Monash University  
-✉️ zihao.chen@monash.edu  
+✉️ zche0292@student.monash.edu  
 🌐 [GitHub Repository](https://github.com/dylanC777/cloud-edge-k8s-resilience)
