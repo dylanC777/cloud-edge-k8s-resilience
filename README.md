@@ -67,7 +67,7 @@ config.yaml
 ## ▶️ Run a Test
 
 ```bash
-python main.py --config config.yaml --fault_yaml ./faults/pod-kill-50.yaml --timeout 10
+python main.py --config config.yaml
 ```
 
 Test artifacts will be saved under the `results/` directory, including:
