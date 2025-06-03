@@ -1,0 +1,28 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Schedule
+metadata:
+  name: cpu-stress-75-pods-schedule
+  namespace: chaos-mesh
+spec:
+  schedule: '@every 3s'
+  historyLimit: 1
+  concurrencyPolicy: 'Forbid'
+  type: 'StressChaos'
+  stressChaos:
+    mode: 'fixed-percent'
+    value: '75'
+    selector:
+      namespaces:
+        - sock-shop
+      expressionSelectors:
+        - key: name
+          operator: In
+          values:
+            - carts
+            - catalogue
+            - user
+    stressors:
+      cpu:
+        workers: 2
+        load: 75
+    duration: '1s'

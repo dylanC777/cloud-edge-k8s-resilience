@@ -1,0 +1,177 @@
+master:
+  # Master node IP or hostname
+  host:   
+  # SSH username for master     
+  user:
+  # Path to SSH key for master node
+  key_path:   
+  
+client:
+  # Client node IP or hostname
+  host:
+  # SSH username for client
+  user:
+  # Path to SSH key for client node
+  key_path:
+
+# Application namespace to check for pod readiness
+app_namespace:
+
+# Cluster health check options
+cluster_checks:
+  skip: false                       # Set to true to skip all health checks
+  continue_on_fail: false           # Set to true to continue even if checks fail
+  wait_for_ready: true              # Wait for cluster to become ready if health checks fail
+  max_wait_attempts: 50             # Maximum number of health check attempts while waiting
+  retry_interval: 20                # Seconds to wait between health check attempts
+  check_before_each_experiment: true # Run checks before each experiment
+  check_after_recovery: true        # Run checks after recovery period
+  locust_retry_count: 50             # Number of times to retry a failed Locust test
+
+# Global timeout recovery settings
+timeout_recovery_seconds: 60        # Wait period between timeout tests within same experiment
+check_between_timeouts: true        # Whether to perform health checks between timeout tests
+test_duration_minutes: 10            # Duration of each Locust test in minutes
+
+# Base path for storing results
+result_base: >
+
+
+# Base experiment template
+defaults: &defaults
+  # the path to the locust script
+  locust_script:
+  # the path to the locust log
+  locust_log: /home/ubuntu/locust_log_constant.csv
+  # user count for the experiment
+  user_counts: [1, 2, 4, 8, 16]
+  # timeouts for the experiment
+  timeouts: [1.0, 3.0, 5.0, 7.0, 10.0]
+  # request rate for the experiment
+  request_rate: 0.2
+  # recovery settings
+  recovery_wait_seconds: 60
+  # timeout settings
+  timeout_recovery_seconds: 60
+  master_count: 1
+  worker_count: 7
+
+experiments:
+  # Container Kill Tests
+  - <<: *defaults
+    delete_schedule: kill-25-containers-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/container-kill/kill-25-containers.yaml"
+    
+  - <<: *defaults
+    delete_schedule: kill-50-containers-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/container-kill/kill-50-containers.yaml"
+    
+  - <<: *defaults
+    delete_schedule: kill-75-containers-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/container-kill/kill-75-containers.yaml"
+    
+  - <<: *defaults
+    delete_schedule: kill-100-containers-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/container-kill/kill-100-containers.yaml"
+    
+  # Network Bandwidth Tests
+  - <<: *defaults
+    delete_schedule: network-bandwidth-25-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/network-bandwidth/network-bandwidth-25.yaml"
+    
+  - <<: *defaults
+    delete_schedule: network-bandwidth-50-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/network-bandwidth/network-bandwidth-50.yaml"
+    
+  - <<: *defaults
+    delete_schedule: network-bandwidth-75-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/network-bandwidth/network-bandwidth-75.yaml"
+    
+  - <<: *defaults
+    delete_schedule: network-bandwidth-100-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/network-bandwidth/network-bandwidth-100.yaml"
+    
+  # Network Delay Tests
+  - <<: *defaults
+    delete_schedule: network-delay-25-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/network-delay/network-delay-25.yaml"
+    
+  - <<: *defaults
+    delete_schedule: network-delay-50-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/network-delay/network-delay-50.yaml"
+    
+  - <<: *defaults
+    delete_schedule: network-delay-75-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/network-delay/network-delay-75.yaml"
+    
+  - <<: *defaults
+    delete_schedule: network-delay-100-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/network-delay/network-delay-100.yaml"
+    
+  # Network Packet Loss Tests
+  - <<: *defaults
+    delete_schedule: network-loss-25-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/network-loss/network-loss-25.yaml"
+    
+  - <<: *defaults
+    delete_schedule: network-loss-50-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/network-loss/network-loss-50.yaml"
+    
+  - <<: *defaults
+    delete_schedule: network-loss-75-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/network-loss/network-loss-75.yaml"
+    
+  - <<: *defaults
+    delete_schedule: network-loss-100-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/network-loss/network-loss-100.yaml"
+    
+  # Network Partition Tests
+  - <<: *defaults
+    delete_schedule: network-partition-25-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/network-partition/network-partition-25.yaml"
+    
+  - <<: *defaults
+    delete_schedule: network-partition-50-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/network-partition/network-partition-50.yaml"
+    
+  - <<: *defaults
+    delete_schedule: network-partition-75-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/network-partition/network-partition-75.yaml"
+    
+  - <<: *defaults
+    delete_schedule: network-partition-100-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/network-partition/network-partition-100.yaml"
+    
+  # Pod Kill Tests
+  - <<: *defaults
+    delete_schedule: kill-25-pods-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/pod-kill/kill-25-pods.yaml"
+    
+  - <<: *defaults
+    delete_schedule: kill-50-pods-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/pod-kill/kill-50-pods.yaml"
+    
+  - <<: *defaults
+    delete_schedule: kill-75-pods-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/pod-kill/kill-75-pods.yaml"
+    
+  - <<: *defaults
+    delete_schedule: kill-100-pods-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/pod-kill/kill-100-pods.yaml"
+    
+  # CPU Stress Tests
+  - <<: *defaults
+    delete_schedule: cpu-stress-25-pods-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/pod-cpu-stress/cpu-stress-25-pods.yaml"
+    
+  - <<: *defaults
+    delete_schedule: cpu-stress-50-pods-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/pod-cpu-stress/cpu-stress-50-pods.yaml"
+    
+  - <<: *defaults
+    delete_schedule: cpu-stress-75-pods-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/pod-cpu-stress/cpu-stress-75-pods.yaml"
+    
+  - <<: *defaults
+    delete_schedule: cpu-stress-100-pods-schedule
+    chaos_yaml: "/home/ubuntu/k8s-chaos-framework-constant-VM/ChaosConfigs/pod-cpu-stress/cpu-stress-100-pods.yaml"

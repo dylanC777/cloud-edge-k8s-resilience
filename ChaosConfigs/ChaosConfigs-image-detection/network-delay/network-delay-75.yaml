@@ -1,0 +1,20 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Schedule
+metadata:
+  name: network-delay-75-schedule
+  namespace: chaos-mesh
+spec:
+  schedule: '@every 3s'
+  historyLimit: 1
+  concurrencyPolicy: 'Forbid'
+  type: 'NetworkChaos'
+  networkChaos:
+    action: delay
+    mode: 'fixed-percent'
+    value: "75"
+    selector:
+      namespaces:
+        - image-detection
+    delay:
+      latency: '200ms'
+    duration: '1s'

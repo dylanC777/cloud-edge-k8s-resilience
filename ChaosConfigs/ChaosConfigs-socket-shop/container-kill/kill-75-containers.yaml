@@ -1,0 +1,29 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Schedule
+metadata:
+  name: kill-75-containers-schedule
+  namespace: chaos-mesh
+spec:
+  schedule: '@every 3s'
+  historyLimit: 1
+  concurrencyPolicy: 'Forbid'
+  type: 'PodChaos'
+  podChaos:
+    action: 'container-kill'
+    mode: 'fixed-percent'
+    value: '75'
+    selector:
+      namespaces:
+        - sock-shop
+      expressionSelectors:
+        - key: name
+          operator: In
+          values:
+            - carts
+            - catalogue
+            - user
+    containerNames:
+      - carts
+      - catalogue
+      - user
+    duration: '1s'

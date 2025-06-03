@@ -1,0 +1,19 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Schedule
+metadata:
+  name: kill-100-pods-schedule
+  namespace: chaos-mesh
+spec:
+  schedule: '@every 3s'
+  historyLimit: 1
+  concurrencyPolicy: 'Forbid'
+  type: 'PodChaos'
+  podChaos:
+    action: 'pod-kill'
+    mode: 'fixed-percent'
+    value: '100'
+    selector:
+      namespaces:
+        - image-detection
+      labelSelectors:
+        app: 'cloud-detect'

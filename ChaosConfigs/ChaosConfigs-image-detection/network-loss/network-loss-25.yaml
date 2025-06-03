@@ -1,0 +1,21 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Schedule
+metadata:
+  name: network-loss-25-schedule
+  namespace: chaos-mesh
+spec:
+  schedule: '@every 3s'
+  historyLimit: 1
+  concurrencyPolicy: 'Forbid'
+  type: 'NetworkChaos'
+  networkChaos:
+    action: loss
+    mode: 'fixed-percent'
+    value: "25"
+    selector:
+      namespaces:
+        - image-detection
+    loss:
+      loss: "30"
+      correlation: "0"
+    duration: "1s"
