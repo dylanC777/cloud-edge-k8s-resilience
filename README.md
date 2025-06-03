@@ -32,9 +32,101 @@ Cloud-edge architectures face heightened fault sensitivity due to distributed to
 
 ---
 
-## 🚀 Getting Started
+## ⚙️ Minimal Dependencies
 
-### 1. Install Dependencies
+```txt
+paramiko — for SSH automation  
+pyyaml   — for config and YAML parsing
+```
+
+Install all dependencies:
 
 ```bash
 pip install -r requirements.txt
+```
+
+---
+
+## 🧪 Setup Kubernetes & Client Nodes
+
+1. **Kubernetes Master Node**  
+   Ensure [Chaos Mesh](https://chaos-mesh.org) is installed and running.
+
+2. **Client Node**  
+   A separate node should run Locust to generate traffic.
+
+3. **Configuration**  
+   All system paths, IP addresses, namespaces, and credentials are set in:
+
+```yaml
+config.yaml
+```
+
+---
+
+## ▶️ Run a Test
+
+```bash
+python main.py --config config.yaml --fault_yaml ./faults/pod-kill-50.yaml --timeout 10
+```
+
+Test artifacts will be saved under the `results/` directory, including:
+
+- ✅ Locust log CSV  
+- ✅ Console output  
+- ✅ Copy of the fault YAML used  
+- ✅ Per-test summary report
+
+---
+
+## 📁 File Structure
+
+```text
+.
+├── main.py
+├── ssh_manager.py
+├── k8s_controller.py
+├── locust_runner.py
+├── result_manager.py
+├── check_cluster.py
+├── cluster_checker.py
+├── csv_processor.py
+├── config.yaml
+├── requirements.txt
+└── results/             # generated automatically
+```
+
+---
+
+## 📂 Dataset Access
+
+The dataset generated using this framework includes:
+
+- ~12,000 fault injection test runs  
+- ~57 million per-request records  
+- ~30 GB of structured time-series logs
+
+> 🔒 **Currently stored in a private repository** during the thesis review period.  
+> 🎓 **Interested researchers** may contact the author for early access.  
+> 📢 Dataset and framework will be **publicly released** after thesis publication.
+
+---
+
+## 📄 License
+
+To be confirmed. The code will be released under an open-source license (e.g., MIT or Apache 2.0) following thesis submission.
+
+---
+
+## 📬 Citation
+
+If this framework supports your research, please cite the associated thesis or [contact the author](mailto:zihao.chen@monash.edu) for preliminary citation format.
+
+---
+
+## 📫 Contact
+
+**Zihao Chen**  
+Monash University  
+✉️ zihao.chen@monash.edu  
+🌐 [GitHub Repository](https://github.com/dylanC777/cloud-edge-k8s-resilience)
