@@ -81,7 +81,7 @@ Test artifacts will be saved under the `results/` directory.
 ├── main.py
 ├── ssh_manager.py
 ├── k8s_controller.py
-├── locust_runner.py
+├── load_runner.py
 ├── result_manager.py
 ├── check_cluster.py
 ├── cluster_checker.py
