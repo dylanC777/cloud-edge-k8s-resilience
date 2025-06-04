@@ -4,7 +4,7 @@ import time
 import sys
 from ssh_manager import SSHManager
 from k8s_controller import K8sController
-from locust_runner import LocustRunner
+from load_runner import LoadRunner
 from result_manager import ResultManager
 from cluster_checker import ClusterChecker
 
@@ -126,7 +126,7 @@ def main():
         os.makedirs(exp_base, exist_ok=True)
         result_manager = ResultManager(exp_base)
 
-        locust_runner = LocustRunner(ssh_client, locust_script, locust_csv_path)
+        load_runner = LoadRunner(ssh_client, locust_script, locust_csv_path)
 
         if not skip_checks:
             print(f"\n=== RESTARTING DEPLOYMENTS BEFORE EXPERIMENT '{exp_label}' ===")
@@ -193,7 +193,7 @@ def main():
                             if retry_num > 1:
                                 print(f"Retrying Locust test (attempt {retry_num}/{locust_retry_count})...")
                             
-                            locust_runner.run_test(
+                            load_runner.run_test(
                                 timeout_value=timeout, 
                                 user_count=user_count, 
                                 test_duration_minutes=test_duration_minutes,
@@ -233,7 +233,7 @@ def main():
 
                     # 3) download console log
                     try:
-                        user_result_manager.download_console_log(ssh_client, locust_runner.console_log_path, result_dir)
+                        user_result_manager.download_console_log(ssh_client, load_runner.console_log_path, result_dir)
                     except Exception as e:
                         print(f"[Warning] download console log fail: {e}")
 

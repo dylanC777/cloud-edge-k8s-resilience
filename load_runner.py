@@ -1,6 +1,6 @@
 import os
 
-class LocustRunner:
+class LoadRunner:
     """
     Runs Locust load tests on the client node for specified configurations.
     Support for concurrent user testing with configurable user counts.
