@@ -24,8 +24,8 @@ Cloud-edge architectures face heightened fault sensitivity due to distributed to
 |---------------------|-------------------------------------------------------|
 | `main.py`           | Orchestrates the full test cycle                      |
 | `ssh_manager.py`    | Handles remote control of Kubernetes/client nodes     |
-| `k8s_controller.py` | Applies Chaos Mesh YAML files to inject faults        |
-| `locust_runner.py`  | Triggers remote Locust load tests                     |
+| `k8s_controller.py` | Applies YAMLs to inject faults in Kubernetes          |
+| `load_runner.py`    | Triggers remote load tests                            |
 | `result_manager.py` | Saves CSVs, visualizations, and per-test summaries    |
 | `check_cluster.py`  | Validates cluster readiness before experiments        |
 | `config.yaml`       | Stores experimental parameters and tasks              |
